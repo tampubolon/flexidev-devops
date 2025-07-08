@@ -1,7 +1,10 @@
 name: Validate Azure Credentials
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - pr-1
+  pull_request:
 
 env:
   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
