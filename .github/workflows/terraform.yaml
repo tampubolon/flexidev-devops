@@ -8,7 +8,6 @@ on:
 
 env:
   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-
 jobs:
   validate:
     name: Validate Azure Login
@@ -21,4 +20,4 @@ jobs:
           creds: ${{ env.AZURE_CREDENTIALS }}
 
       - name: Show current Azure account
-        run: az account show
+        run: az account show --output json | tee /dev/stdout
