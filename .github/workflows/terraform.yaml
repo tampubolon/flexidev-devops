@@ -4,7 +4,8 @@ name: Terraform Apply
 on:
   push:
     branches:
-      - main
+    #   - main
+      - pr-1
   pull_request:
 
 env:
