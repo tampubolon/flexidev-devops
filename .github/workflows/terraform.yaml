@@ -1,18 +1,10 @@
-# .github/workflows/terraform.yaml
-name: Terraform Provision Azure App Service
+name: Validate Azure Credentials
 
 on:
-  push:
-    branches:
-      - pr-1
-  pull_request:
+  workflow_dispatch:
 
 env:
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  TF_LOG: DEBUG  # <--- Add this line for verbose Terraform logs
+  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
 jobs:
   validate:
@@ -23,10 +15,7 @@ jobs:
       - name: Login to Azure using Service Principal
         uses: azure/login@v1
         with:
-          client-id: ${{ env.AZURE_CLIENT_ID }}
-          tenant-id: ${{ env.AZURE_TENANT_ID }}
-          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
-          client-secret: ${{ env.AZURE_CLIENT_SECRET }}
+          creds: ${{ env.AZURE_CREDENTIALS }}
 
       - name: Show current Azure account
         run: az account show
