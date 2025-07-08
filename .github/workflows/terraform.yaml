@@ -15,24 +15,18 @@ env:
   TF_LOG: DEBUG  # <--- Add this line for verbose Terraform logs
 
 jobs:
-  terraform:
-    name: 'Terraform Apply to Azure'
+  validate:
+    name: Validate Azure Login
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v3
+      - name: Login to Azure using Service Principal
+        uses: azure/login@v1
         with:
-          terraform_version: 1.5.7
+          client-id: ${{ env.AZURE_CLIENT_ID }}
+          tenant-id: ${{ env.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          client-secret: ${{ env.AZURE_CLIENT_SECRET }}
 
-      - name: Terraform Init
-        run: terraform init -input=false
-
-      - name: Terraform Validate
-        run: terraform validate
-
-      - name: Terraform Plan
-        run: terraform plan -input=false -out=tfplan
+      - name: Show current Azure account
+        run: az account show
