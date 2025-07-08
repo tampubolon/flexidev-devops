@@ -1,10 +1,9 @@
 # .github/workflows/terraform.yaml
-name: Terraform Apply
+name: Terraform Provision Azure App Service
 
 on:
   push:
     branches:
-    #   - main
       - pr-1
   pull_request:
 
