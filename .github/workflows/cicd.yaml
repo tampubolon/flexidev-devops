@@ -34,12 +34,13 @@ jobs:
 
       - name: List files for debugging
         run: |
+          cd azure/app
           echo "PWD: $(pwd)"
           ls -la
 
       - name: Build Docker image
         run: |
-          cd app
+          cd azure/app
           docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest .
 
 
