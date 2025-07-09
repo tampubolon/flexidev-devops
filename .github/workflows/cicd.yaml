@@ -38,9 +38,9 @@ jobs:
           ls -la
 
       - name: Build Docker image
-      run: |
-        cd app
-        docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest .
+        run: |
+          cd app
+          docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest .
 
 
       - name: Push Docker image to Docker Hub
