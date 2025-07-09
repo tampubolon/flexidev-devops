@@ -32,10 +32,15 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${DOCKERHUB_TOKEN}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
 
-      - name: Build Docker image
+      - name: List files for debugging
         run: |
-          cd app
-          docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest .
+          echo "PWD: $(pwd)"
+          ls -la
+
+      - name: Build Docker image
+      run: |
+        cd app
+        docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest .
 
 
       - name: Push Docker image to Docker Hub
