@@ -33,15 +33,16 @@ jobs:
         run: echo "${DOCKERHUB_TOKEN}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
 
       - name: Build Docker image
+        working-directory: ./app
         run: |
-          docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest ./app
+          docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest .
 
       - name: Push Docker image to Docker Hub
         run: |
           docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest
 
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          images: ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+            - name: Deploy to Azure Web App
+              uses: azure/webapps-deploy@v2
+              with:
+                app-name: ${{ env.AZURE_WEBAPP_NAME }}
+                images: ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:latest
