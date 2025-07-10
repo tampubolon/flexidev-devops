@@ -1,0 +1,55 @@
+name: Build and Deploy Vue App to Azure
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - pr-1
+  pull_request:
+
+env:
+  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  DOCKER_IMAGE_NAME: frontend
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  AZURE_WEBAPP_NAME: ${{ secrets.AZURE_WEBAPP_NAME }}
+  DOCKER_REGISTRY: docker.io
+
+jobs:
+  deploy:
+    name: Build, Push and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ env.AZURE_CREDENTIALS }}
+
+      - name: Log in to Docker Hub
+        run: echo "${DOCKERHUB_TOKEN}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
+
+      - name: List files for debugging
+        run: |
+          cd azure/app
+          echo "PWD: $(pwd)"
+          ls -la
+
+      - name: Build Docker image
+        run: |
+          cd azure/app
+          docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest .
+
+
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+            app-name: ${{ env.AZURE_WEBAPP_NAME }}
+            images: ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:latest
