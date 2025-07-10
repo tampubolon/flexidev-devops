@@ -31,13 +31,23 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${DOCKERHUB_TOKEN}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
 
+      - name: Generate Docker image tag
+        id: vars
+        run: |
+          DATE_TAG=$(date +%Y%m%d)-${GITHUB_SHA::7}
+          echo "tag=$DATE_TAG" >> $GITHUB_OUTPUT        
+
       - name: Build Docker image
         run: |
           cd azure/app
-          docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest .
+          docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:${{ steps.vars.outputs.tag }} .
+          docker tag ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:${{ steps.vars.outputs.tag }} ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest
+
 
       - name: Push Docker image
-        run: docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest
+        run: |
+          docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:${{ steps.vars.outputs.tag }}
+          docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest
 
       - name: Deploy to Azure Web App (Testing)
         uses: azure/webapps-deploy@v2
@@ -45,5 +55,8 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           images: ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:latest
 
-      - name: Echo deployed URL
-        run: echo "Deployed to testing at $TESTING_URL"
+      - name: Summary
+        run: |
+          echo "### ✅ Deployed Successfully" >> $GITHUB_STEP_SUMMARY
+          echo "- Environment: **Testing**" >> $GITHUB_STEP_SUMMARY
+          echo "- URL: [${{ env.TESTING_URL }}](${{ env.TESTING_URL }})" >> $GITHUB_STEP_SUMMARY

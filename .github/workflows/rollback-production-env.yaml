@@ -1,0 +1,35 @@
+name: Rollback to Specific Docker Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      docker_tag:
+        description: 'Docker tag to deploy (e.g., v1.3.0, 20250710-a1b2c3d)'
+        required: true
+
+env:
+  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  DOCKER_IMAGE_NAME: frontend
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  AZURE_WEBAPP_NAME: ${{ secrets.AZURE_WEBAPP_PRODUCTION_NAME }}
+  PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
+
+jobs:
+  rollback:
+    name: Rollback Production Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ env.AZURE_CREDENTIALS }}
+
+      - name: Deploy specified image tag to production
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          images: ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.event.inputs.docker_tag }}
+
+      - name: Echo rollback info
+        run: echo "Production rolled back to tag: ${{ github.event.inputs.docker_tag }} → $PRODUCTION_URL"
