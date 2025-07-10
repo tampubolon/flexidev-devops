@@ -1,4 +1,4 @@
-name: Rollback to Specific Docker Tag
+name: Rollback Production to Specific Docker Tag
 
 on:
   workflow_dispatch:
@@ -32,4 +32,5 @@ jobs:
           images: ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.event.inputs.docker_tag }}
 
       - name: Echo rollback info
-        run: echo "Production rolled back to tag: ${{ github.event.inputs.docker_tag }} → $PRODUCTION_URL"
+        run: |
+            echo "Production rolled back to tag: ${{ github.event.inputs.docker_tag }} → $PRODUCTION_URL"
