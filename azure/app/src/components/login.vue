@@ -111,7 +111,7 @@ export default {
 
 <style scoped>
 .v-main {
-  background-color:rgb(255, 255, 255); /* Vuetify blue */
+  background-color:rgb(255, 128, 0); /* Vuetify blue */
 }
 
 .fill-height {
@@ -123,7 +123,7 @@ export default {
 }
 
 .btn-login {
-  background-color:rgb(255, 255, 255) !important;
+  background-color:rgb(255, 128, 0) !important;
   color: white !important;
   text-transform: none;
   font-weight: bold;
