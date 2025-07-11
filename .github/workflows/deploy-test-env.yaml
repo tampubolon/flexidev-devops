@@ -36,21 +36,23 @@ jobs:
       - name: Build Docker image
         run: |
           cd azure/app
-          docker build -t martinus/${DOCKER_IMAGE_NAME}:${{ steps.vars.outputs.tag }} .
+          docker build -t ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:${{ steps.vars.outputs.tag }} .
 
       - name: Push Docker image
         run: |
-          docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:${{ steps.vars.outputs.tag }}          
+          docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:${{ steps.vars.outputs.tag }}
 
       - name: Deploy to Azure Web App (Testing)
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ vars.AZURE_WEBAPP_TESTING_NAME }}  # 👈 Using environment-scoped variable
-          images: martinus/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.vars.outputs.tag }}        
+          app-name: ${{ vars.AZURE_WEBAPP_TESTING_NAME }}
+          images: ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
 
       - name: Summary
         run: |
           echo "### ✅ Deployed Successfully" >> $GITHUB_STEP_SUMMARY
           echo "- Environment: **Testing**" >> $GITHUB_STEP_SUMMARY
           echo "- URL: [${{ vars.TESTING_URL }}](${{ vars.TESTING_URL }})" >> $GITHUB_STEP_SUMMARY
-          echo "- Image: martinus/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.vars.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Image: ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.vars.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit: [${{ github.sha }}](${{
+            github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})" >> $GITHUB_STEP_SUMMARY
