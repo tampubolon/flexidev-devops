@@ -40,7 +40,7 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push martinus/${DOCKER_IMAGE_NAME}:${{ steps.vars.outputs.tag }}
+          docker push ${DOCKERHUB_USERNAME}/${DOCKER_IMAGE_NAME}:${{ steps.vars.outputs.tag }}          
 
       - name: Deploy to Azure Web App (Testing)
         uses: azure/webapps-deploy@v2
