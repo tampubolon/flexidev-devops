@@ -68,7 +68,7 @@ jobs:
 
       - name: Run ESLint
         run: |
-          npx eslint src --ext .js,.vue -f node_modules/eslint-formatter-sarif/sarif.js -o eslint-results.sarif
+          npx eslint src --ext .js,.vue -f eslint-formatter-sarif -o eslint-results.sarif
 
       - name: Upload ESLint results to GitHub
         uses: github/codeql-action/upload-sarif@v3
