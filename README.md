@@ -32,10 +32,10 @@ To merge a PR into the `main` branch, the following three requirements must be f
 A PR can **only be merged once all three requirements are met.**
 
 #### 🔒 PR that **cannot** be merged:
-![PR failing checks](images/image2.png)
+![PR failing checks](azure/app/images/image2.png)
 
 #### ✅ PR that **has passed** all checks:
-![PR passing checks](images/image.png)
+![PR passing checks](azure/app/images/image.png)
 
 
 
