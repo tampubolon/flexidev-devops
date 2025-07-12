@@ -1,4 +1,4 @@
-# Portal/Frontend Application
+# TASK 1 - Azure : Deploy Portal/Frontend Application
 
 
 ## Branching and Deployment strategy 
@@ -87,3 +87,6 @@ git push origin rollback/v1.2.0
          │ rollback/v1.2.0    │      │ hotfix/urgent-fix  │
          └────────────────────┘      └────────────────────┘
 ```
+
+
+# TASK 2 - AWS
