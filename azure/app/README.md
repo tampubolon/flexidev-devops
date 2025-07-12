@@ -19,8 +19,12 @@ git push origin feature/my-feature
       - ✅ The `deploy-test-env.yaml` workflow must pass. This workflow deploys the code changes to the test environment (Azure App Service named `testing-flexidev`).
       - ✅ The `scan-codeql.yaml` workflow must pass. It runs a CodeQL scan to detect potential security vulnerabilities.
       - ✅ The PR must receive at least one approval from another engineer.
-- The PR can only be merged once all three requirements have been successfully met.    
+- The PR can only be merged once all three requirements have been successfully met.  
+      - 🔒 PR that cannot be merged:
+      ![alt text](image2.png)
+      - ✅ PR that has passed all checks:
       ![alt text](images/image.png)
+
 
 
 ```
