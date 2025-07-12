@@ -41,13 +41,16 @@ A PR can **only be merged once all three requirements are met.**
 
 
 ### Deploy to Production
-Azure App Service production: https://production-flexidev-d2e8czhjadgfhzbx.australiacentral-01.azurewebsites.net/login
+Azure App Service production: https://production-flexidev-d2e8czhjadgfhzbx.australiacentral-01.azurewebsites.net/login <br>
+To create new tag for production, run below command:
 ```
 # Tag the release
 git tag -a v1.3.0 -m "Release v1.3.0"
 git push origin v1.3.0
 # CI/CD deploys main or v1.3.0 tag to production
 ```
+To deploy to production, run Github workflow `deploy-production-env.yaml`.
+
 
 ### 🔁 Rollback to previous version
 ```
@@ -89,6 +92,6 @@ git push origin rollback/v1.2.0
          │ rollback/v1.2.0    │      │ hotfix/urgent-fix  │
          └────────────────────┘      └────────────────────┘
 ```
-
 <br>
+
 # TASK 2 - AWS
