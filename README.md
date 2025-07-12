@@ -12,20 +12,20 @@ git checkout -b feature/my-feature
 git push origin feature/my-feature
 ```
 
-### ✅ Merge to test environment
-```
-git checkout test
-git merge feature/my-feature
-git push origin test
-# CI/CD deploys test branch to test environment
-```
+### ✅ Deploy to test environment
+- Github action workflow `deploy-test-env.yaml` and `scan-codeql.yaml` will run automatically when new PR created or new changes pushed to `feature/*` branch.
+- Three requirements must be fulfilled before the PR can be merged into the  `main` branch:
+      - ✅ The `deploy-test-env.yaml` workflow must pass. This workflow deploys the code changes to the test environment (Azure App Service named `testing-flexidev`).
+      - ✅ The `scan-codeql.yaml` workflow must pass. It runs a CodeQL scan to detect potential security vulnerabilities.
+      - ✅ The PR must receive at least one approval from another engineer.
+- The PR can only be merged once all three requirements have been successfully met.  
+      - 🔒 PR that cannot be merged:
+      ![alt text](image2.png)
+      - ✅ PR that has passed all checks:
+      ![alt text](images/image.png)
 
 ### Deploy to Production
 ```
-git checkout main
-git merge test
-git push origin main
-
 # Tag the release
 git tag -a v1.3.0 -m "Release v1.3.0"
 git push origin v1.3.0
@@ -42,28 +42,28 @@ git push origin rollback/v1.2.0
 
 ### Branching and Deployment Flow
 ```
-                               ┌────────────┐
-                               │  feature/* │ ← your local development
-                               └─────┬──────┘
-                                     │
-                                     ▼
-                                ┌────────┐
-                                │ test   │ ← shared testing branch
-                                └────┬───┘
-                                     │
-                      [merge/rebase after testing OK]
-                                     │
-                                     ▼
-                                ┌────────┐
-                                │ main   │ ← always production-ready
-                                └────┬───┘
-                                     │
-                               [tag release]
-                                     │
-                                     ▼
-                         ┌────────────────────┐
-                         │ tag: v1.3.0        │ ← used for deployment
-                         └────────────────────┘
+                            ┌────────────┐
+                            │  feature/* │ ← your local development
+                            └─────┬──────┘
+                                  │
+                                  ▼
+                        ┌────────────────────┐
+                        │ deploy to test env │ ← Az https://testing-flexidev-a5b7bthsd8c7ekgf.australiacentral-01.azurewebsites.net/login
+                        └──────────┬─────────┘
+                                   │
+               [merge/rebase after deploy to test env OK]
+                                   │
+                                   ▼
+                               ┌────────┐
+                               │ main   │ ← always production-ready
+                               └────┬───┘
+                                    │
+                              [tag release]
+                                    │
+                                    ▼
+                        ┌────────────────────┐
+                        │ tag: v1.3.0        │ ← used for deployment
+                        └────────────────────┘
                                      │
                           ┌──────────┴──────────┐
                           │                     │
