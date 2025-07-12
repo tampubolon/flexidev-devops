@@ -13,7 +13,6 @@ git push origin feature/my-feature
 ```
 
 ### ✅ Deploy to test environment
-```
 - Github action workflow `deploy-test-env.yaml` and `scan-codeql.yaml` will run automatically when new PR created or new changes pushed to `feature/*` branch.
 - Three requirements must be fulfilled before the PR can be merged into the  `main` branch:
       - ✅ The `deploy-test-env.yaml` workflow must pass. This workflow deploys the code changes to the test environment (Azure App Service named `testing-flexidev`).
@@ -25,13 +24,8 @@ git push origin feature/my-feature
       - ✅ PR that has passed all checks:
       ![alt text](images/image.png)
 
-
-
-```
-
 ### Deploy to Production
 ```
-
 # Tag the release
 git tag -a v1.3.0 -m "Release v1.3.0"
 git push origin v1.3.0
