@@ -34,27 +34,20 @@ To merge a PR into the `main` branch, the following three requirements must be f
 ---
 
 A PR can **only be merged once all three requirements are met.**
-
-#### 🔒 PR that **cannot** be merged:
-
-
-![PR needs approval](azure/app/images/image3.png)
-
 #### ✅ PR that **has passed** all checks:
 ![PR passing checks](azure/app/images/image.png)
-
 
 
 ### Deploy to Production
 Azure App Service production: https://production-flexidev-d2e8czhjadgfhzbx.australiacentral-01.azurewebsites.net/login <br>
 To create new tag for production, run below command:
 ```
-# Tag the release
+# Create new Tag
 git tag -a v1.3.0 -m "Release v1.3.0"
 git push origin v1.3.0
-# CI/CD deploys main or v1.3.0 tag to production
 ```
 To deploy to production, run Github workflow `deploy-production-env.yaml`.
+![Deploy to Production env](azure/app/images/image5.png)
 
 
 ### 🔁 Rollback to previous version
