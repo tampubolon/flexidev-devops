@@ -12,27 +12,24 @@ git checkout -b feature/my-feature
 git push origin feature/my-feature
 ```
 
-### ✅ Deploy to test environment
+### [ ] Deploy to test environment
 GitHub Actions workflows `deploy-test-env.yaml` and `scan-codeql.yaml` will run automatically when a new pull request (PR) is created or new changes are pushed to any `feature/*` branch.
 
 #### ✅ Requirements to Merge into `main`
 
 To merge a PR into the `main` branch, the following three requirements must be fulfilled:
 
-1. ✅ The `deploy-test-env.yaml` workflow must pass  
+1. [ ] The `deploy-test-env.yaml` workflow must pass  
    &nbsp;&nbsp;&nbsp;&nbsp;This deploys the code changes to the test environment (Azure App Service named `testing-flexidev`).
 
-2. ✅ The `scan-codeql.yaml` workflow must pass  
+2. [ ] The `scan-codeql.yaml` workflow must pass  
    &nbsp;&nbsp;&nbsp;&nbsp;This runs a CodeQL scan to detect potential security vulnerabilities.
 
-3. ✅ The PR must receive at least one approval from another engineer.
+3. [ ] The PR must receive at least one approval from another engineer.
 
 ---
 
 A PR can **only be merged once all three requirements are met.**
-
-#### 🔒 PR that **cannot** be merged:
-![PR failing checks](images/image2.png)
 
 #### ✅ PR that **has passed** all checks:
 ![PR passing checks](images/image.png)
