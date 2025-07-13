@@ -1,4 +1,4 @@
-# TASK 1 - Azure : Deploy Portal/Frontend to Azure App Service
+# TASK 1 - Azure: Deploy Portal/Frontend to Azure App Service
 
 
 ## Branching and Deployment strategy 
@@ -99,6 +99,36 @@ git push origin rollback/v1.2.0
          │ rollback/v1.2.0    │      │ hotfix/urgent-fix  │
          └────────────────────┘      └────────────────────┘
 ```
-<br>
+<br><br><br>
 
-# TASK 2 - AWS
+# TASK 2 - AWS Network Firewall
+
+## Architecture Diagram
+![arcitecture](aws/images/image.png)
+
+
+## VPC Screenshot
+![vpc](aws/images/image2.png)
+
+## Subnets Screenshot
+### Firewall Subnet
+![firewall-subnet](aws/images/image3.png)
+
+### Customer Subnet
+![customer-subnet](aws/images/image4.png)
+
+## Route Tables Screenshot
+### IGW-RTB
+![igw-rtb](aws/images/image5.png)
+
+### Firewall-RTB
+![firewall-rtb](aws/images/image6.png)
+
+### Customer-RTB
+![customer-rtb](aws/images/image7.png)
+
+## Accessing Nginx Page on EC2 Public IP Screen Record
+![nginx-behind-firewall](aws/images/nginx-firewall.gif)
+
+## Run `yum` (`apt`) on EC2 Screen Record
+![alt text](aws/images/sudo-yum.gif)
