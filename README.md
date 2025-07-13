@@ -131,4 +131,10 @@ git push origin rollback/v1.2.0
 ![nginx-behind-firewall](aws/images/nginx-firewall.gif)
 
 ## Run `yum` (`apt`) on EC2 Screen Record
-![alt text](aws/images/sudo-yum.gif)
+![yum-apt](aws/images/sudo-yum.gif)
+
+
+## Network Firewall Monitoring and Loggin
+The video below confirms that the network traffic is successfully routed through the AWS Network Firewall.
+Traffic flow: `202.65.239.252 => Network Firewall => 192.168.2.214`
+![monitoring-log](aws/images/nw-firewall-monitoring-log.gif)
