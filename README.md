@@ -1,4 +1,4 @@
-# TASK 1 - Azure : Deploy Portal/Frontend Application
+# TASK 1 - Azure : Deploy Portal/Frontend to Azure App Service
 
 
 ## Branching and Deployment strategy 
@@ -22,35 +22,33 @@ To merge a PR into the `main` branch, the following three requirements must be f
 
 1. ✅ The `deploy-test-env.yaml` workflow must pass  
    &nbsp;&nbsp;&nbsp;&nbsp;This deploys the code changes to the test environment (Azure App Service named `testing-flexidev`).
+![PR failing checks](azure/app/images/image2.png) 
 
 2. ✅ The `scan-codeql.yaml` workflow must pass  
    &nbsp;&nbsp;&nbsp;&nbsp;This runs a CodeQL scan to detect potential security vulnerabilities.
+![PR failing checks](azure/app/images/image3.png)   
 
 3. ✅ The PR must receive at least one approval from another engineer.
+![PR needs approval](azure/app/images/image4.png)
 
 ---
 
 A PR can **only be merged once all three requirements are met.**
-
-#### 🔒 PR that **cannot** be merged:
-![PR failing checks](azure/app/images/image2.png)
-
 #### ✅ PR that **has passed** all checks:
-![PR passing checks](azure/app/images/image.png)
-
+![PR passing checks](azure/app/images/image.png)<br><br>
 
 
 ### Deploy to Production
 Azure App Service production: https://production-flexidev-d2e8czhjadgfhzbx.australiacentral-01.azurewebsites.net/login <br>
 To create new tag for production, run below command:
 ```
-# Tag the release
+# Create new Tag
 git tag -a v1.3.0 -m "Release v1.3.0"
 git push origin v1.3.0
-# CI/CD deploys main or v1.3.0 tag to production
 ```
 To deploy to production, run Github workflow `deploy-production-env.yaml`.
-
+![Deploy to Production env](azure/app/images/image5.png)
+Check available tags [here](https://github.com/tampubolon/flexidev-devops/tags).
 
 ### 🔁 Rollback to previous version
 ```
