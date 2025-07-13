@@ -1,4 +1,4 @@
-# TASK 1 - Azure : Deploy Portal/Frontend Application
+# TASK 1 - Azure : Deploy Portal/Frontend to Azure App Service
 
 
 ## Branching and Deployment strategy 
@@ -35,7 +35,7 @@ To merge a PR into the `main` branch, the following three requirements must be f
 
 A PR can **only be merged once all three requirements are met.**
 #### ✅ PR that **has passed** all checks:
-![PR passing checks](azure/app/images/image.png)<br>
+![PR passing checks](azure/app/images/image.png)<br><br>
 
 
 ### Deploy to Production
@@ -48,7 +48,7 @@ git push origin v1.3.0
 ```
 To deploy to production, run Github workflow `deploy-production-env.yaml`.
 ![Deploy to Production env](azure/app/images/image5.png)
-
+Check available tags [here](https://github.com/tampubolon/flexidev-devops/tags).
 
 ### 🔁 Rollback to previous version
 ```
