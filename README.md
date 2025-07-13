@@ -1,4 +1,4 @@
-# TASK 1 - Azure: Deploy Portal/Frontend to Azure App Service
+# TASK 1 - Azure: Deploy Frontend to Azure App Service
 
 
 ## Branching and Deployment strategy 
