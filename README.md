@@ -35,7 +35,7 @@ To merge a PR into the `main` branch, the following three requirements must be f
 
 A PR can **only be merged once all three requirements are met.**
 #### ✅ PR that **has passed** all checks:
-![PR passing checks](azure/app/images/image.png)
+![PR passing checks](azure/app/images/image.png)<br>
 
 
 ### Deploy to Production
