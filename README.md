@@ -25,15 +25,19 @@ To merge a PR into the `main` branch, the following three requirements must be f
 
 2. ✅ The `scan-codeql.yaml` workflow must pass  
    &nbsp;&nbsp;&nbsp;&nbsp;This runs a CodeQL scan to detect potential security vulnerabilities.
+![PR failing checks](azure/app/images/image2.png)   
 
 3. ✅ The PR must receive at least one approval from another engineer.
+![PR needs approval](azure/app/images/image3.png)
 
 ---
 
 A PR can **only be merged once all three requirements are met.**
 
 #### 🔒 PR that **cannot** be merged:
-![PR failing checks](azure/app/images/image2.png)
+
+
+![PR needs approval](azure/app/images/image3.png)
 
 #### ✅ PR that **has passed** all checks:
 ![PR passing checks](azure/app/images/image.png)
