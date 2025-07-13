@@ -13,18 +13,18 @@ git push origin feature/my-feature
 ```
 
 ### Deploy to test environment
-GitHub Actions workflows `deploy-test-env.yaml` and `scan-codeql.yaml` will run automatically when a new pull request (PR) is created or new changes are pushed to any `feature/*` branch. <br>
+GitHub Actions workflows `.github/workflows/deploy-test-env.yaml` and `.github/workflows/scan-codeql.yaml` will run automatically when a new pull request (PR) is created or new changes are pushed to any `feature/*` branch. <br>
 Azure App Service staging: https://testing-flexidev-a5b7bthsd8c7ekgf.australiacentral-01.azurewebsites.net/login
 
 #### ✅ Requirements to Merge into `main`
 
 To merge a PR into the `main` branch, the following three requirements must be fulfilled:
 
-1. ✅ The `deploy-test-env.yaml` workflow must pass  
+1. ✅ The `.github/workflows/deploy-test-env.yaml` workflow must pass  
    &nbsp;&nbsp;&nbsp;&nbsp;This deploys the code changes to the test environment (Azure App Service named `testing-flexidev`).
 ![PR failing checks](azure/app/images/image2.png) 
 
-2. ✅ The `scan-codeql.yaml` workflow must pass  
+2. ✅ The `.github/workflows/scan-codeql.yaml` workflow must pass  
    &nbsp;&nbsp;&nbsp;&nbsp;This runs a CodeQL scan to detect potential security vulnerabilities.
 ![PR failing checks](azure/app/images/image3.png)   
 
@@ -46,7 +46,11 @@ To create new tag for production, run below command:
 git tag -a v1.3.0 -m "Release v1.3.0"
 git push origin v1.3.0
 ```
-To deploy to production, run Github workflow `deploy-production-env.yaml`.
+When new tag is create, `./github/workflows/build-tag.yaml` will be triggered.
+![build docker image from a new tag](azure/app/images/image6.png)
+
+
+To deploy to production, run Github workflow `/github/workflows/deploy-production-env.yaml`.
 ![Deploy to Production env](azure/app/images/image5.png)
 Check available tags [here](https://github.com/tampubolon/flexidev-devops/tags).
 
