@@ -53,7 +53,7 @@ When new tag is create, `./github/workflows/build-tag.yaml` will be triggered.
 To deploy to production, run Github workflow `/github/workflows/deploy-production-env.yaml`.
 ![Deploy to Production env](azure/app/images/image5.png)
 See the video below for a demo of the production deployment process.
-<video controls src="azure/app/images/prod-deploy.mp4" title="Title"></video>
+![Production Deployement Process](azure/app/images/prod-deploy.gif)
 Check available tags [here](https://github.com/tampubolon/flexidev-devops/tags)/
 
 
