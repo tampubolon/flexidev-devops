@@ -3,6 +3,39 @@
 
 ## Branching and Deployment strategy 
 
+### Branching and Deployment Flow
+```
+                            ┌────────────┐
+                            │  feature/* │ ← your local development
+                            └─────┬──────┘
+                                  │
+                                  ▼
+                        ┌────────────────────┐
+                        │ deploy to test env │ ← https://testing-flexidev-a5b7bthsd8c7ekgf.australiacentral-01.azurewebsites.net/login
+                        └──────────┬─────────┘
+                                   │
+               [merge/rebase after deploy to test env OK]
+                                   │
+                                   ▼
+                               ┌────────┐
+                               │ main   │ ← always production-ready
+                               └────┬───┘
+                                    │
+                              [tag release]
+                                    │
+                                    ▼
+                        ┌────────────────────┐
+                        │ tag: v1.2.0        │ ← used for Production deployment: https://production-flexidev-d2e8czhjadgfhzbx.australiacentral-01.azurewebsites.net/login
+                        └────────────────────┘
+                                     │
+                          ┌──────────┴──────────┐
+                          │                     │
+               [rollback] ▼                     ▼ [hotfix]
+         ┌────────────────────┐      ┌────────────────────┐
+         │ rollback/v1.2.0    │      │ hotfix/urgent-fix  │
+         └────────────────────┘      └────────────────────┘
+```
+
 ### Develop a feature
 ```
 git checkout main
@@ -66,39 +99,6 @@ git checkout tags/v1.2.0 -b rollback/v1.2.0
 git push origin rollback/v1.2.0
 # CI/CD deploys rollback branch or tag v1.2.0 to production
 ```
-
-### Branching and Deployment Flow
-```
-                            ┌────────────┐
-                            │  feature/* │ ← your local development
-                            └─────┬──────┘
-                                  │
-                                  ▼
-                        ┌────────────────────┐
-                        │ deploy to test env │ ← https://testing-flexidev-a5b7bthsd8c7ekgf.australiacentral-01.azurewebsites.net/login
-                        └──────────┬─────────┘
-                                   │
-               [merge/rebase after deploy to test env OK]
-                                   │
-                                   ▼
-                               ┌────────┐
-                               │ main   │ ← always production-ready
-                               └────┬───┘
-                                    │
-                              [tag release]
-                                    │
-                                    ▼
-                        ┌────────────────────┐
-                        │ tag: v1.2.0        │ ← used for Production deployment: https://production-flexidev-d2e8czhjadgfhzbx.australiacentral-01.azurewebsites.net/login
-                        └────────────────────┘
-                                     │
-                          ┌──────────┴──────────┐
-                          │                     │
-               [rollback] ▼                     ▼ [hotfix]
-         ┌────────────────────┐      ┌────────────────────┐
-         │ rollback/v1.2.0    │      │ hotfix/urgent-fix  │
-         └────────────────────┘      └────────────────────┘
-```
 <br><br><br>
 
 # TASK 2 - AWS Network Firewall
@@ -120,6 +120,7 @@ git push origin rollback/v1.2.0
 ## Route Tables Screenshot
 ### IGW-RTB
 ![igw-rtb](aws/images/image5.png)
+![igt-rtb-edge](aws/images/image10.png)
 
 ### Firewall-RTB
 ![firewall-rtb](aws/images/image6.png)
@@ -133,14 +134,14 @@ git push origin rollback/v1.2.0
 ### Network Firewall Policy - Rule Group
 ![policy-rule-group](aws/images/image9.png)
 
-## Accessing Nginx Page on EC2 Public IP Screen Record
+## Accessing Nginx Page on EC2 Public IP -- Screen Record
 ![nginx-behind-firewall](aws/images/nginx-firewall.gif)
 
-## Run `yum` (`apt`) on EC2 Screen Record
+## Run `yum` (`apt`) on EC2 -- Screen Record
 ![yum-apt](aws/images/sudo-yum.gif)
 
 
-## Network Firewall Monitoring and Loggin
+## Network Firewall Monitoring and Logging
 The video below confirms that the network traffic is successfully routed through the AWS Network Firewall.
 Traffic flow: `202.65.239.252 => Network Firewall => 192.168.2.214`
 ![monitoring-log](aws/images/nw-firewall-monitoring-log.gif)
