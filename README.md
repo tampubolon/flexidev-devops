@@ -149,3 +149,8 @@ Traffic flow: `202.65.239.252 => Network Firewall => 192.168.2.214`
 ## MBTI Test Result
 Link to test result: https://www.16personalities.com/profiles/entj-a/m/61h0g5jke
 ![mbti](image.png)
+
+## DISC Personality Test Result
+![disc](image2.png)
+![disc2](image3.png)
+![disc3](image4.png)
