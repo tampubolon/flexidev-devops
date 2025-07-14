@@ -132,16 +132,20 @@ git push origin rollback/v1.2.0
 ### Network Firewall Overview Screenshot
 ![nw-firewall](aws/images/image8.png)
 ### Network Firewall Policy - Rule Group
-![policy-rule-group](aws/images/image9.png)
+![policy-rule-group](aws/images/image9.png)<br><br>
 
 ## Accessing Nginx Page on EC2 Public IP -- Screen Record
-![nginx-behind-firewall](aws/images/nginx-firewall.gif)
+![nginx-behind-firewall](aws/images/nginx-firewall.gif)<br>
 
 ## Run `yum` (`apt`) on EC2 -- Screen Record
-![yum-apt](aws/images/sudo-yum.gif)
+![yum-apt](aws/images/sudo-yum.gif)<br>
 
 
-## Network Firewall Monitoring and Logging
+## Network Firewall Monitoring and Logging -- Screen Record
 The video below confirms that the network traffic is successfully routed through the AWS Network Firewall.
 Traffic flow: `202.65.239.252 => Network Firewall => 192.168.2.214`
-![monitoring-log](aws/images/nw-firewall-monitoring-log.gif)
+![monitoring-log](aws/images/nw-firewall-monitoring-log.gif)<br><br>
+
+## MBTI Test Result
+![mbti]](image.png)
+
