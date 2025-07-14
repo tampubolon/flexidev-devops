@@ -1,1 +1,0 @@
-# Terraform config to provision resourcegroup `martinus-trial-rg`

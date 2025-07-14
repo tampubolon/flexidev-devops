@@ -144,4 +144,8 @@ git push origin rollback/v1.2.0
 ## Network Firewall Monitoring and Logging -- Screen Record
 The video below confirms that the network traffic is successfully routed through the AWS Network Firewall.
 Traffic flow: `202.65.239.252 => Network Firewall => 192.168.2.214`
-![monitoring-log](aws/images/nw-firewall-monitoring-log.gif)
+![monitoring-log](aws/images/nw-firewall-monitoring-log.gif)<br><br>
+
+## MBTI Test Result
+![mbti]](image.png)
+
