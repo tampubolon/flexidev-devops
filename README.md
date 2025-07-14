@@ -147,5 +147,5 @@ Traffic flow: `202.65.239.252 => Network Firewall => 192.168.2.214`
 ![monitoring-log](aws/images/nw-firewall-monitoring-log.gif)<br><br>
 
 ## MBTI Test Result
-![mbti]](image.png)
-
+Link to test result: https://www.16personalities.com/profiles/entj-a/m/61h0g5jke
+![mbti](image.png)
